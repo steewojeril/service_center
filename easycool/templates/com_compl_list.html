@@ -1,0 +1,39 @@
+{%extends 'base.html'%}
+{%block body_block%}
+    <div class="row">
+        <div class="col-2">
+            {% if filter_param == 'ac' %}
+            <a class="btn btn-info" href="{%url 'add_com_complaints'%}?filter=ac">Add</a>
+            {% elif filter_param == 'rf' %}
+            <a class="btn btn-info" href="{%url 'add_com_complaints'%}?filter=rf">Add</a>
+            {% elif filter_param == 'wm' %}
+            <a class="btn btn-info" href="{%url 'add_com_complaints'%}?filter=wm">Add</a>
+            {% endif %}
+            <a class="btn btn-warning" href="{%url 'filter_com_complaint'%}">Back</a>
+
+
+        </div>
+        <div class="col-8">
+            <table class="table table-hover">
+                {%if com_complaints%}
+                <thead class="table-success">
+                    <tr>
+                        <th>Complaints</th>
+                        <th>Appliance</th>
+                    </tr>
+                </thead>
+                {%for com in com_complaints%}
+                <tr>
+                    <td>{{com.complaint}}</td>
+                    <td>{{com.appliance}}</td>
+                </tr>            
+                {%endfor%}
+            {%else%}
+            <h3>No Common complaints added...!</h3>
+            {%endif%}
+        </table>  
+        </div>
+        <div class="col-2"></div>
+
+    </div>
+{%endblock%}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{%static 'css/dashboard.css'%}">
+
+</head>
+    
+    
+<body>
+    {%if messages%}
+    {%for m in messages%}
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            {% if m.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Great!</strong> {{m}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {%endif%}
+            {% if m.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> {{m}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {%endif%}
+            {% if m.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <strong>Info!</strong> {{m}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {%endif%}
+        </div>
+        <div class="col-4"></div>
+    </div>
+    {%endfor%}
+    {%endif%}
+
+{%if request.user.is_authenticated%}
+<nav class="navbar navbar-expand-lg bg-success shadow">
+        <div class="container-fluid ">
+          <a class="navbar-brand text-white" href="#">EASYCOOL</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active text-white" aria-current="page" href="{%url 'home'%}">Pending</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Customers
+                    </a>
+                    <ul class="dropdown-menu bg-success">
+                        <li><a class="dropdown-item text-white" href="{%url 'add_customer'%}">Add Customer</a></li>
+                        <li><a class="dropdown-item text-white" href="{%url 'customer_list'%}">All Customers</a></li>
+                    </ul>
+                </li>
+
+                <a class="nav-link active text-white" aria-current="page" href="{%url 'serviced_items'%}">Service register</a>
+                <a class="nav-link active text-white" aria-current="page" href="{%url 'duedate'%}">Due dates</a>
+                
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Configurations
+                    </a>
+                    <ul class="dropdown-menu bg-success">
+                        <li><a class="dropdown-item text-white" href="{%url 'list_tech'%}">Technicians</a></li>
+                        <li><hr class="dropdown-divider bg-white"></li>
+                        <li><a class="dropdown-item text-white" href="{%url 'brands_list'%}">Brands</a></li>
+                        <li><a class="dropdown-item text-white" href="{%url 'capacity_list'%}">Capacity</a></li>
+                        <li><a class="dropdown-item text-white" href="{%url 'type_list'%}">Type</a></li>
+                        <li><a class="dropdown-item text-white" href="{%url 'filter_com_complaint'%}">Common Complaints</a></li>
+                    </ul>
+                </li>
+                
+            </div>
+            <a class="nav-link active text-white" aria-current="page" href="{%url 'signout'%}">Logout</a>
+        </div>
+        </div>
+      </nav>
+{%endif%}    
+      <div class="container-fluid mt-3">
+        {%block body_block%}
+        {%endblock%}
+    </div>
+<!-- Ensure jQuery is included before this script -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Wait for the DOM to load
+        $(".alert").delay(3000).fadeOut(1000, function() {
+            $(this).alert('close'); // Close the alert after fadeOut
+        });
+    });
+</script>
+
+</body>
+</html>

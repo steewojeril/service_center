@@ -1,0 +1,287 @@
+{%extends 'base.html'%}
+{%block body_block%}
+<div class="row">
+  <!--customer details  -->
+
+  <div class="col-3">
+    <div class="card text-bg-success mb-3" style="height: 100%;">
+      <div class="card-header">Customer</div>
+      <div class="card-body">
+
+        {%if complaint.customer%}
+              <div class="row">
+                <div class="col">
+                  <h6 class="mb-0">Name : </h6>
+                </div>
+                <div class="col">
+                  {{complaint.customer.name}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <h6 class="mb-0">Email : </h6>
+                </div>
+                <div class="col">
+                  {{complaint.customer.email}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <h6 class="mb-0">Phone : </h6>
+                </div>
+                <div class="col">
+                  {{complaint.customer.phone1}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <h6 class="mb-0">Phone No:2 : </h6>
+                </div>
+                <div class="col">
+                  {{complaint.customer.phone2}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <h6 class="mb-0">Place : </h6>
+                </div>
+                <div class="col">
+                  {{complaint.customer.place}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <h6 class="mb-0">Address : </h6>
+                </div>
+                <div class="col">
+                  {{complaint.customer.address}}
+                </div>
+              </div>
+              <hr>
+              {%endif%}
+
+            </div>
+    </div>
+  </div>
+
+<!--complaint details  -->
+
+  <div class="col-7">
+    <div class="card border-success mb-3" style="height: 100%;">
+      {%if complaint%}
+      <div class="card-header d-flex justify-content-between"">Issue
+        <div>Status : 
+          {%if complaint.status == 'pending'%}
+          <span class="badge rounded-pill bg-danger">{{complaint.status}}</span>
+          {%elif complaint.status == 'parts_pending'%}
+          <span class="badge rounded-pill bg-info">{{complaint.status}}</span>
+          {%else%}
+          <span class="badge rounded-pill bg-success">{{complaint.status}}</span>
+          {%endif%}
+        </div>
+
+      </div>
+      
+      <div class="d-flex">
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col">
+              <h6 class="mb-0">Complaint : </h6>
+            </div>
+            <div class="col">
+              {{complaint.common_complaint.complaint}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <h6 class="mb-0">Date : </h6>
+            </div>
+            <div class="col">
+              {{complaint.complaint_date}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <h6 class="mb-0">Technician : </h6>
+            </div>
+            <div class="col">
+              {{complaint.technician}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <h6 class="mb-0">Rectified Issue : </h6>
+            </div>
+            <div class="col">
+              {{complaint.rectified_issue}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <h6 class="mb-0">Bill No : </h6>
+            </div>
+            <div class="col">
+              {{complaint.bill_no}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <h6 class="mb-0">Bill Amt : </h6>
+            </div>
+            <div class="col">
+              {{complaint.bill_amt}}
+            </div>
+          </div>
+          <hr>
+          
+          
+          
+
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h6 class="mb-0">Complaint type : </h6>
+            </div>
+            <div class="col">
+              {{complaint.complaint_type}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <h6 class="mb-0">Status : </h6>
+            </div>
+            <div class="col">
+              {{complaint.status}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <h6 class="mb-0">Rectified Date : </h6>
+            </div>
+            <div class="col">
+              {{complaint.rectified_date}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <h6 class="mb-0">Note : </h6>
+            </div>
+            <div class="col">
+              {{complaint.note}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <h6 class="mb-0">Remarks : </h6>
+            </div>
+            <div class="col">
+              {{complaint.remarks}}
+            </div>
+          </div>
+          <hr>
+          {%endif%}
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!--appliance details  -->
+  <div class="col-2">
+    <div class="card border-info mb-3" style="height: 100%;">
+      <div class="card-header">Appliance</div>
+      <div class="card-body">
+                {%if complaint.customer%}
+
+              <div class="row">
+                <div class="col">
+                  <h6 class="mb-0">Appliance : </h6>
+                </div>
+                <div class="col">
+                  {{complaint.appliance.appliance_name}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <h6 class="mb-0">Brand : </h6>
+                </div>
+                <div class="col">
+                  {{complaint.appliance.brand}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <h6 class="mb-0">Inverter : </h6>
+                </div>
+                <div class="col">
+                  {{complaint.appliance.inverter}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <h6 class="mb-0">Fully Automatic : </h6>
+                </div>
+                <div class="col">
+                  {{complaint.appliance.fully_automatic}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <h6 class="mb-0">Appliance Type : </h6>
+                </div>
+                <div class="col">
+                  {{complaint.appliance.type}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <h6 class="mb-0">Capacity : </h6>
+                </div>
+                <div class="col">
+                  {{complaint.appliance.capacity}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <h6 class="mb-0">Next Service On : </h6>
+                </div>
+                <div class="col">
+                  <span class="badge text-bg-success">{{complaint.appliance.next_service_date}}</span>
+                  
+                </div>
+              </div>
+              <hr>
+              
+
+              {%endif%}
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+
+{%endblock%}

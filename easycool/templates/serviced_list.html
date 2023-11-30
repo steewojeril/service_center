@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+{%block body_block%}
+
+
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <table class="table table-hover">
+                {%if complaints%}
+                <thead class="table-success">
+                    <tr>
+                        <th>Date</th>
+                        <th>customer</th>
+                        <th>Appliance</th>
+                        <th>Complaint</th>
+                        <th>Technician</th>
+                        <th>Bill No</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {%for complaint in complaints%}
+                <tr>
+                    <td>{{complaint.complaint_date}}</td>
+                    <td>{{complaint.customer}}</td>
+                    <td>{{complaint.appliance.appliance_name}}</td>
+                    <td>{{complaint.common_complaint}}</td>
+                    <td>{{complaint.technician.name}}</td>
+                    <td>{{complaint.bill_no}}</td>
+                    <td><a class="btn btn-success" href="{%url 'edit_complaint' complaint.id%}">Edit</a>
+                        <a class="btn btn-warning" href="{%url 'complaint_detail' complaint.id%}">view details</a>
+                    </td>
+                </tr>            
+                {%endfor%}
+            {%else%}
+            <h3>No Complaints...!</h3>
+            {%endif%}
+        </table>  
+        </div>
+        <div class="col-1"></div>
+
+    </div>
+
+
+
+
+{%endblock%}

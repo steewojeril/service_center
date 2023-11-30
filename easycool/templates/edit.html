@@ -1,0 +1,82 @@
+{%extends 'base.html'%}
+{%block body_block%}
+
+    <div class="row mt-5">
+        <div class="col-2"></div>
+        <div class="col-8 card">
+            <form action="" method="post" >
+                {%csrf_token%}
+                <div class="d-flex align-content-around justify-content-xl-around flex-wrap card-body">
+
+                    {{form.as_p}}
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-info">Save Changes</button>
+                </div>
+            </form> 
+        </div>
+        <div class="col-2"></div>
+    </div>
+
+<!-- make fields visibily dynamically -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        function populateCapacities(selectedAppliance) {
+            $.ajax({
+                url: '/get-capacities/',  // Replace with your URL to fetch capacities dynamically
+                data: {
+                    'appliance': selectedAppliance
+                },
+                dataType: 'json',
+                success: function (data) {
+                    var capacityField = $('#id_capacity');
+                    capacityField.empty();
+                    $.each(data.capacities, function (key, value) {
+                        capacityField.append($('<option></option>').attr('value', key).text(value));
+                    });
+                    var typeField = $('#id_type');
+                    typeField.empty();
+                    $.each(data.types, function (key, value) {
+                        typeField.append($('<option></option>').attr('value', key).text(value));
+                    });
+                }
+            });
+        }
+
+
+        function toggleFields(selectedAppliance) {
+    var $inverter = $('#id_inverter, label[for="id_inverter"]');
+    var $fully_automatic = $('#id_fully_automatic, label[for="id_fully_automatic"]');
+
+    // Clear field values
+    // Show inverter for 'refrigerator' and 'ac', hide for 'washing_machine'
+    if (selectedAppliance === 'refrigerator' || selectedAppliance === 'ac') {
+        $fully_automatic.val('').prop('checked', false);
+        $inverter.show();
+    } else {
+        $inverter.hide();
+    }
+    
+    // Show fully_automatic for 'washing_machine', hide for 'refrigerator' and 'ac'
+    if (selectedAppliance === 'washing_machine') {
+        $inverter.val('').prop('checked', false);
+        $fully_automatic.show();
+    } else {
+        $fully_automatic.hide();
+    }
+}
+
+
+        var defaultAppliance = $('#id_appliance_name').val();
+        populateCapacities(defaultAppliance);
+        toggleFields(defaultAppliance);
+
+        $('#id_appliance_name').change(function () {
+            var selectedAppliance = $(this).val();
+            populateCapacities(selectedAppliance);
+            toggleFields(selectedAppliance);
+        });
+    });
+</script>
+{%endblock%}

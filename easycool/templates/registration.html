@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-3"></div>
+            <div class="col-6 border">
+                <form action="" class="mt-5" method="post">
+                   {%csrf_token%}
+                   {{form.as_p}}
+                    <!-- <div class="mb-3">
+                        <input type="text" name="firstname" placeholder="enter firstname" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="lastname" placeholder="enter lastname" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <input type="emai" name="email" placeholder="enter email" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="username" placeholder="enter username" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" name="password" placeholder="enter password" class="form-control">
+                    </div> -->
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-info">SignUp</button>
+                        <a class="btn btn-outline-primary" href="{%url 'login'%}">Login</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+    
+</body>
+</html>

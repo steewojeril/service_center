@@ -1,0 +1,48 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block body_block%}
+
+
+
+    <div class="row">
+        <div class="col-1">
+            <a href="{%url 'add_customer_appliance'%}" class="btn btn-warning">Register</a>
+
+        </div>
+        <div class="col-10">
+            <table class="table table-hover">
+                {%if all_pending_complaints%}                
+                <thead class="table-danger">
+                    <tr>
+                        <th>customer</th>
+                        <th>Appliances</th>
+                        <th>complaint</th>
+                        <th>complaint type</th>
+                        <th>Date</th>
+                        <th>Technician</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {%for complaint in all_pending_complaints%}
+                <tr>
+                    <td>{{complaint.customer.name}}</td>
+                    <td>{{complaint.appliance.appliance_name}}</td>
+                    <td>{{complaint.common_complaint.complaint}}</td>
+                    <td>{{complaint.complaint_type}}</td>
+                    <td>{{complaint.complaint_date}}</td>
+                    <td>{{complaint.technician.name}}</td>
+                    <td>
+                        <a class="btn btn-info" href="{%url 'edit_complaint' complaint.id%}">edit</a>
+                        <a class="btn btn-warning" href="{%url 'complaint_detail' complaint.id%}">view details</a>
+                    </td>
+                </tr>            
+                {%endfor%}
+            {%else%}
+            <h3>No pending complaints...!</h3>
+            {%endif%}
+        </table>   
+        </div>
+        <div class="col-1"></div>
+        </div>
+        
+{%endblock%}

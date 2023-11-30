@@ -1,0 +1,51 @@
+{%extends 'base.html'%}
+{%block body_block%}
+
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                        <h6 class="mb-0">A/C</h6>
+                    </div>
+                    <div class="col text-secondary">
+                        <a class="btn btn-warning" href="{%url 'add_com_complaints'%}?filter=ac">Add</a>
+                        <a class="btn btn-info" href="{%url 'list_com_complaints'%}?filter=ac">view</a>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col">
+                        <h6 class="mb-0">Refrigerator</h6>
+                    </div>
+                    <div class="col text-secondary">
+                        <a class="btn btn-warning" href="{%url 'add_com_complaints'%}?filter=rf">Add</a>
+                        <a class="btn btn-info" href="{%url 'list_com_complaints'%}?filter=rf">view</a>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col">
+                        <h6 class="mb-0">Washingmachine</h6>
+                    </div>
+                    <div class="col text-secondary">
+                        <a class="btn btn-warning" href="{%url 'add_com_complaints'%}?filter=wm">Add</a>
+                        <a class="btn btn-info" href="{%url 'list_com_complaints'%}?filter=wm">view</a>
+                    </div>
+                  </div>
+                  
+                  
+                </div>
+              </div>
+        
+        </div>
+        <div class="col-2"></div>
+    </div>
+
+    
+
+
+{{complaint.id}}
+{%endblock%}

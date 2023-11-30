@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+{%block body_block%}
+<div class="table mt-4">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <table class="table table-hover">
+                {%if appliances%}
+                <thead class="table-info">
+                    <tr>
+                        <th>Customer</th>
+                        <th>place</th>
+                        <th>Phone</th>
+                        <th>Brand</th>
+                        <th>Next Service Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {%for appliance in appliances%}
+                <tr>
+                    <td>{{appliance.customer.name}}</td>
+                    <td>{{appliance.customer.place}}</td>
+                    <td>{{appliance.customer.phone1}}</td>
+                    <td>{{appliance.brand}}</td>
+                    <td>{{appliance.next_service_date}}</td>
+                    <td>
+
+                        <a class="btn btn-info" href="{%url 'customer_details' appliance.customer.id%}">Customer Details</a>
+                        <a class="btn btn-warning" href="{%url 'send_mail' appliance.id%}">Send email</a>
+                    </td>
+                </tr>            
+                {%endfor%}
+            {%else%}
+            <h3>No Dues...!</h3>
+            {%endif%}
+        </table>  
+        </div>
+        <div class="col-2"></div>
+
+    </div>
+</div>
+{%endblock%}

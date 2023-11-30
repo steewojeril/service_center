@@ -1,0 +1,109 @@
+{%extends 'base.html'%}
+{%block body_block%}
+
+
+{%if customer%}
+<div class="row">
+ 
+<div class="col-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h6 class="mb-0">Name</h6>
+                    </div>
+                    <div class="col text-secondary">
+                      {{customer.name}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col text-secondary">
+                      {{customer.email}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col">
+                      <h6 class="mb-0">Phone</h6>
+                    </div>
+                    <div class="col text-secondary">
+                      {{customer.phone1}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col">
+                      <h6 class="mb-0">Phone No:2</h6>
+                    </div>
+                    <div class="col text-secondary">
+                      {{customer.phone2}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col">
+                      <h6 class="mb-0">Place</h6>
+                    </div>
+                    <div class="col text-secondary">
+                      {{customer.place}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col">
+                      <h6 class="mb-0">Address</h6>
+                    </div>
+                    <div class="col text-secondary">
+                      {{customer.address}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col">
+                      <a class="btn btn-warning" href="{%url 'edit_customer' customer.id%}">Update Customer Details</a>
+                      <a class="btn btn-warning" href="{%url 'add_appliance' customer.id%}">Add appliance</a>
+                    </div>
+                  </div>
+                </div>
+  
+</div>            </div>
+    
+  {%endif%}
+  
+  {%if appliance_list%}
+        <div class="col-8">
+          <table class="table table-hover">
+            <thead class="table-success">
+              <tr>
+                <th>appliance</th>
+                <th>Brand</th>
+                <th>Capacity</th>
+                <th>Next Service</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            {%for appliance in appliance_list%}
+            <tr>
+              <td>{{appliance.appliance_name}}</td>        
+              <td>{{appliance.brand}}</td>        
+              <td>{{appliance.capacity}}</td>        
+              <td>{{appliance.next_service_date}}</td>        
+              <td>
+                <a class="btn btn-warning" href="{%url 'edit_appliance' appliance.id%}"> Edit</a>
+                <a class="btn btn-warning" href="{%url 'history' appliance.id%}"> History</a>
+                <a class="btn btn-warning" href="{%url 'register_complaint' appliance.customer.id appliance.id%}">Register Complaint</a>
+              </td>        
+          </tr>
+          {%endfor%}
+          </table>
+        </div>
+
+    {%endif%}
+</div>
+  
+  
+  {%endblock%}

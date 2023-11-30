@@ -1,0 +1,16 @@
+.dropdown-item:hover {
+    background-color: rgba(7, 82, 49, 0.384); /* RGB with alpha (opacity) */
+    color: white; /* Text color on hover */
+}
+
+thead,nav{
+    position: sticky;
+    top: 0;
+}
+
+.table-container {
+    overflow-x: hidden; /* Enable horizontal scrolling if needed */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+    max-height: 400px; /* Set a maximum height for the table to enable vertical scrolling */
+}
+
