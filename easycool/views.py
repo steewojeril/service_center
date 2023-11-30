@@ -72,7 +72,6 @@ class LoginView(View):
             user=authenticate(request,username=username,password=password)
             if user:
                 login(request,user)
-                print('user:::',request.user)
                 messages.success(request,'You have been successfully Logged in. Welcome %s' %request.user)
                 return redirect('home')
             else:
@@ -89,7 +88,7 @@ class LogoutView(View):
 # ajax view   (it always deals with json)
 @sign_in_required
 def get_capacities(request):
-    selected_appliance = request.GET.get('appliance')
+    selected_appliance = request.GET.get('appliance') #taking appliance from data passed through url get request (through ajax request. refer create_customer_to_appliance.html)
     capacities = Capacity.objects.filter(appliance_name=selected_appliance).values_list('id', 'name')
     types = Types.objects.filter(appliance_name=selected_appliance).values_list('id', 'name')
     data = {'capacities': dict(capacities),'types': dict(types)}
@@ -109,7 +108,7 @@ def search_customer(request):
     if search_query and search_type.lower()=='name':
         customer_list = customer_list.filter(name__icontains=search_query)
     if search_query and search_type.lower()=='phone':
-        customer_list = customer_list.filter(Q(phone1__icontains=search_query) | Q(phone2__icontains=search_query))
+        customer_list = customer_list.filter(Q(phone1__icontains=search_query) | Q(phone2__icontains=search_query)) #performing or condition inside orm
 
     paginator = Paginator(customer_list.order_by('name'), 10)
     page_number = request.GET.get('page')
@@ -364,6 +363,13 @@ class RegisterComplaint(CreateView):
     template_name='create_complaint_form.html'
     success_url=reverse_lazy('home')
 
+# passing url data(aid) to the form __init__ method
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        aid = self.kwargs.get('aid')  # Extract appliance_id from URL kwargs
+        kwargs['appliance_id'] = aid  # Pass appliance_id to the form
+        return kwargs
+    
     def form_valid(self, form):
         cid=self.kwargs.get('cid')
         customer_instance=Customers.objects.get(id=cid)

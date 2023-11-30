@@ -93,6 +93,17 @@ class CreateCommonComplaintForm(forms.ModelForm):
         fields=['complaint']
 
 class CreateComplaintForm(forms.ModelForm):
+    # to pass different queryset to a foriegnkey field in a form when the form is loaded
+    def __init__(self, *args, **kwargs):
+        appliance_id = kwargs.pop('appliance_id', None)  # Extract appliance_id from kwargs
+        appliance=Appliances.objects.get(id=appliance_id)
+        super(CreateComplaintForm, self).__init__(*args, **kwargs)
+
+        if appliance_id is not None:
+            self.fields['common_complaint'].queryset = CommonComplaints.objects.filter(appliance=appliance.appliance_name)
+        else:
+            self.fields['common_complaint'].queryset = CommonComplaints.objects.none()
+            
     class Meta:
         model= Complaints
         fields=['common_complaint','complaint_type','technician','note']
