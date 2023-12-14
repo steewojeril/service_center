@@ -25,7 +25,7 @@ def send_due_email(subject,body):
             subject,
             body,
             'steewoj@gmail.com',
-            ['jeriljosec123@gmail.com'],
+            ['steewoj@gmail.com'],
             fail_silently=True,
         )
 
